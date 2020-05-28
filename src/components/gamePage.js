@@ -1,34 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
 
-import Grid from './grid.js';
-import { initiateGrid } from '../utils/helpers.js';
+import GameGrid from './grid.js';
+import ControlBar from './controlBar.js';
+
+import { generateEmptyMatrix } from '../utils/helpers.js';
 
 const GamePage = () => {
-    // console.log('page render')
-    const [ nextGen, setNextGen ] = useState([]);
-    const [ currGen, setCurrGen ] = useState([]);
-    const [ prevGen, setPrevGen ] = useState([]);
-    const [ genCount, setGenCount] = useState(0);
     const [ gridSize, setGridSize ] = useState({
         rows: 50,
-        columns: 50
+        cols: 50
     });
+    const [ matrix, setMatrix ] = useState(() => {
+        return generateEmptyMatrix(gridSize.rows, gridSize.cols)
+    });
+    const [ animating, setAnimating ] = useState(false);
+    const [ genCount, setGenCount ] = useState(0);
+    const [ refreshRate, setRefreshRate ] = useState(100);
 
-    // console.log(currGen)
-
-    useEffect(() => {
-        initiateGrid(gridSize.rows, gridSize.columns, setCurrGen)
-    }, [gridSize])
+    
 
     return (
         <div>
-            <Grid 
-                rows={gridSize.rows}
-                columns={gridSize.columns}
-                currGen={currGen}
-                setCurrGen={setCurrGen}/>
-
+            <GameGrid 
+                gridSize={gridSize} 
+                animating={animating}
+                matrix={matrix}
+                setMatrix={setMatrix}
+                setGenCount={setGenCount}
+                genCount={genCount}
+                refreshRate={refreshRate}
+                />
+            <ControlBar 
+                animating={animating} 
+                setAnimating={setAnimating}
+                setGenCount={setGenCount}
+                genCount={genCount} 
+                gridSize={gridSize}
+                setGridSize={setGridSize}
+                setMatrix={setMatrix}
+                />
         </div>
     )
 };
