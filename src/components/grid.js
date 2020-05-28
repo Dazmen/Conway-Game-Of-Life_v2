@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-// import Cell from './cell.js';
-
 const Grid = (props) => {
-    // console.log('grid render')
+
 
     const handleActiveToggle = (cellIndex) => {
         const newGrid = props.currGen.map((cell, i) => {
@@ -15,9 +13,9 @@ const Grid = (props) => {
                 return cell
             }
         })
-        // console.log('NEW', newGrid)
         props.setCurrGen(newGrid)
-    }
+        
+    };
 
     return (
         <GridContainer rows={props.rows} columns={props.columns}>

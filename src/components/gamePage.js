@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import Grid from './grid.js';
+import ControlBar from './controlBar.js';
 import { initiateGrid } from '../utils/helpers.js';
 
 const GamePage = () => {
@@ -14,8 +15,8 @@ const GamePage = () => {
         rows: 50,
         columns: 50
     });
-
-    // console.log(currGen)
+    console.log('next', nextGen)
+    console.log('current', currGen)
 
     useEffect(() => {
         initiateGrid(gridSize.rows, gridSize.columns, setCurrGen)
@@ -27,8 +28,19 @@ const GamePage = () => {
                 rows={gridSize.rows}
                 columns={gridSize.columns}
                 currGen={currGen}
-                setCurrGen={setCurrGen}/>
-
+                setCurrGen={setCurrGen}
+                setNextGen={setNextGen}
+                />
+            <ControlBar 
+                prevGen={prevGen}
+                currGen={currGen}
+                nextGen={nextGen}
+                genCount={genCount}
+                setPrevGen={setPrevGen}
+                setCurrGen={setCurrGen}
+                setNextGen={setNextGen}
+                setGenCount={setGenCount}
+                />
         </div>
     )
 };
