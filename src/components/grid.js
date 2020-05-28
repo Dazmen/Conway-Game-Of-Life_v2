@@ -1,21 +1,22 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import styled from 'styled-components';
 import produce from 'immer';
 
-import { generateMatrix, generateNextMatrix } from '../utils/helpers.js';
+import { generateNextMatrix } from '../utils/helpers.js';
 import useInterval from '../utils/hooks/useInterval.js'; // Dan Abermov's useInterval Hook
 
 const GameGrid = (props) => {
-    const { gridSize, animating, } = props;
-    const [ matrix, setMatrix ] = useState(() => {
-        return generateMatrix(gridSize.rows, gridSize.cols)
-    })
+    const { gridSize, animating, matrix, setMatrix, setGenCount, genCount, refreshRate } = props;
     
 
     useInterval(() => {
         setMatrix(matrix => generateNextMatrix(matrix));
-        console.log('NEW MATRIX', matrix)
-    }, animating ? 500 : null)
+        const start = performance.now();
+        setGenCount(produce(count => count += 1))
+        const end = performance.now();
+        console.log('runtime(ms)', end - start);
+        
+    }, animating ? refreshRate : null)
 
     // will need to have a nested loop to loop traverse the matrix for rendering 
     return (
@@ -25,7 +26,7 @@ const GameGrid = (props) => {
 
             {matrix.map((row, r) => {
                 return row.map((col, c) => {
-                    return <Box 
+                    return <Cell 
                             key={`row: ${r}, col: ${c}`}
                             style={{backgroundColor: matrix[r][c] ? "black" : null}}
                             onClick={() => {
@@ -42,7 +43,7 @@ const GameGrid = (props) => {
 
 export default GameGrid;
 
-const Box = styled.div.attrs(props => ({
+const Cell = styled.div.attrs(props => ({
     boxSize: props.boxSize
 }))`
     box-sizing: border-box;

@@ -1,6 +1,6 @@
 import produce from 'immer';
 
-export function generateMatrix(numRows, numCols){
+export function generateEmptyMatrix(numRows, numCols){
     const rows = []; // this will become the matrix
     const cols = [];
 
@@ -25,15 +25,42 @@ export function generateMatrix(numRows, numCols){
     return rows
 };
 
+export function generateRandomMatrix(numRows, numCols){
+    
+    const matrix = generateEmptyMatrix(numRows, numCols);
+    
+    const randomMatrix = matrix.map(row => {
+        return row.map(col => {
+            if(Math.random() > .6){
+                col = 1
+            };
+            return col
+        })
+    })
+    
+    return randomMatrix
+};
+
+/* 
+Future goal: Try to reduce the time complexity.
+    - could be done by cache'ing the matrix coordinates of the active cells
+    - Would then need to write a new algorithm for that
+        - it would loop through the array of active cell coordinates, first checking it's immediate neighbors to apply the rules to itself.
+        - it would then have to cache the dead neighbor cell's coordinates.
+        - after checking the live cells, it would then check the cached dead neighbor cells, for each cached dead cell it would check for the relevant applicable rules.
+            - would it be better to check the dead cell's neighbors directly?
+            - or check the potential live neighbor positions using the cached living cell coordinates
+*/
 export function generateNextMatrix(matrix) {
+    
     // get the count of the rows and columns
     const rows = matrix.length;
     const cols = matrix[0].length;
 
-    // array of 'indicie' directions, direction[0] representing row an [1] representing column
+    // array of 'index directions', direction[0] representing row and [1] representing column
     const directions = [
-        [-1, -1], // NW: 
-        [-1, 0], //  N:
+        [-1, -1], // NW
+        [-1, 0], //  N
         [-1, 1], // NE
         [0, -1], // W
         [0, 1], // E
@@ -44,9 +71,7 @@ export function generateNextMatrix(matrix) {
 
 
     const newMatrix = produce(matrix, matrixCopy => {
-        console.log('arg', matrix)
         for(let r = 0; r < rows; r++){
-
             for(let c = 0; c < cols; c++){
                 let activeNeighbors = 0;
 
@@ -73,6 +98,6 @@ export function generateNextMatrix(matrix) {
             };
         };
     });
-    console.log('new',newMatrix)
+    
     return newMatrix
 };
