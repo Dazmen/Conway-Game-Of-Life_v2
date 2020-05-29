@@ -52,7 +52,7 @@ Future goal: Try to reduce the time complexity.
             - or check the potential live neighbor positions using the cached living cell coordinates
 */
 export function generateNextMatrix(matrix) {
-    
+    const start = performance.now();
     // get the count of the rows and columns
     const rows = matrix.length;
     const cols = matrix[0].length;
@@ -98,6 +98,13 @@ export function generateNextMatrix(matrix) {
             };
         };
     });
-    
+    const end = performance.now();
+    // console.log('runtime(ms) Generate Next', end - start);
     return newMatrix
 };
+
+export function preset(matrix, cb, presetStr){
+    
+
+
+}
