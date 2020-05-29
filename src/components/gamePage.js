@@ -42,40 +42,27 @@ const GamePage = () => {
     return (
         <div>
             <H1>John Conway's Game of Life</H1>
-
-                
-                    <GridRuleContainer>
-
-                        <GameGrid 
-                            gridSize={gridSize} 
-                            animating={animating}
-                            matrix={matrix}
-                            setMatrix={setMatrix}
-                            cellColor={cellColor}
-                            genCount={genCount} 
-                            setAnimating={setAnimating}
-                            setGenCount={setGenCount}
-                            />
-
-                        <Rules 
-                            setAnimating={setAnimating}
-                            setGenCount={setGenCount}
-                            setGridSize={setGridSize}
-                            setMatrix={setMatrix}
-                            setCellColor={setCellColor}
-                        />
-                    </GridRuleContainer> 
-                    {/* <ControlBar 
-                        animating={animating} 
+                <GridRuleContainer>
+                    <GameGrid 
+                        gridSize={gridSize} 
+                        animating={animating}
+                        matrix={matrix}
+                        setMatrix={setMatrix}
+                        cellColor={cellColor}
+                        genCount={genCount} 
                         setAnimating={setAnimating}
                         setGenCount={setGenCount}
-                        genCount={genCount} 
-                        gridSize={gridSize}
+                        />
+
+                    <Rules 
+                        setAnimating={setAnimating}
+                        setGenCount={setGenCount}
                         setGridSize={setGridSize}
                         setMatrix={setMatrix}
                         setCellColor={setCellColor}
-                        /> */}
-               
+                        setRefreshRate={setRefreshRate}
+                    />
+                </GridRuleContainer>
         </div>
     )
 };
@@ -86,11 +73,8 @@ const H1 = styled.h1`
     text-align: center;
 `;
 
-
 const GridRuleContainer = styled.div`
     display: flex;
     justify-content: space-evenly;
-    
-
 `;
 

@@ -35,5 +35,4 @@ const Container = styled.div`
 const RuleContainer = styled.div`
     width: 70%;
     margin-left: 10%;
-    
 `;
