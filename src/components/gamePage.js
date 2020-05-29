@@ -35,7 +35,7 @@ const GamePage = () => {
             clearInterval(interval)
        }
        return () => clearInterval(interval)
-   }, [animating])
+   }, [animating, refreshRate])
 
 
 
