@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { generateEmptyMatrix } from '../utils/helpers.js';
 
 const RuleBar = (props) => {
-    const {  setAnimating, setGenCount, setRefreshRate
+    const {  setAnimating, setGenCount, setRefreshRate,
              setGridSize, setMatrix, setCellColor } = props;
 
     const colors = ["Crimson", "ForestGreen", "DarkOrange", "DarkViolet", "black"]
@@ -63,7 +63,7 @@ const RuleBar = (props) => {
                 <Button onClick={() => {
                     setRefreshRate(200)
                 }}>
-                    5 FPS (default)
+                    5 FPS 
                 </Button>
 
                 <Button onClick={() => {
