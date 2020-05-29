@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { generateEmptyMatrix } from '../utils/helpers.js';
 
 const RuleBar = (props) => {
-    const {  setAnimating, setGenCount,
+    const {  setAnimating, setGenCount, setRefreshRate,
              setGridSize, setMatrix, setCellColor } = props;
 
     const colors = ["Crimson", "ForestGreen", "DarkOrange", "DarkViolet", "black"]
@@ -57,6 +57,26 @@ const RuleBar = (props) => {
                         large(60x60)
                     </Button>
                 </div>
+            </div>
+            <div>
+                <h3>Generation Speed:</h3>
+                <Button onClick={() => {
+                    setRefreshRate(200)
+                }}>
+                    5 FPS 
+                </Button>
+
+                <Button onClick={() => {
+                    setRefreshRate(100)
+                }}>
+                    10 FPS
+                </Button>
+
+                <Button onClick={() => {
+                    setRefreshRate(50)
+                }}>
+                    20 FPS
+                </Button>
             </div>
         </GridRules>
     )
